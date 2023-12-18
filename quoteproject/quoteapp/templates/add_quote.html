@@ -1,0 +1,15 @@
+<!-- quoteapp/templates/quoteapp/add_quote.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Quote</title>
+</head>
+<body>
+    <h1>Add Quote</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

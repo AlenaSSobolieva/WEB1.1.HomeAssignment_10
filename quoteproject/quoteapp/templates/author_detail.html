@@ -1,0 +1,15 @@
+<!-- quoteapp/templates/quoteapp/author_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Author Detail</title>
+</head>
+<body>
+    <h1>Author: {{ author.name }}</h1>
+    <p>{{ author.bio }}</p>
+    <h2>Quotes:</h2>
+    {% for quote in quotes %}
+        <p>{{ quote.text }}</p>
+    {% endfor %}
+</body>
+</html>
