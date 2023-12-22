@@ -1,15 +1,16 @@
-<!-- quoteapp/templates/quoteapp/add_author.html -->
+<!-- quoteapp/templates/registration/login.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Author</title>
+    <title>User Login</title>
 </head>
 <body>
-    <h1>Add Author</h1>
+    <h1>User Login</h1>
     <form method="post" action="">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit">Login</button>
     </form>
 </body>
 </html>
+

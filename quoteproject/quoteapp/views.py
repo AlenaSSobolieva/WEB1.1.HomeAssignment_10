@@ -1,37 +1,30 @@
 # quoteapp/views.py
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Author, Quote
-from .forms import AuthorForm, QuoteForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout
 
-def quote_list(request):
-    quotes = Quote.objects.all()
-    return render(request, 'quoteapp/quote_list.html', {'quotes': quotes})
-
-@login_required
-def add_author(request):
+def register(request):
     if request.method == 'POST':
-        form = AuthorForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('quote_list')
+            user = form.save()
+            login(request, user)
+            return redirect('home')
     else:
-        form = AuthorForm()
-    return render(request, 'quoteapp/add_author.html', {'form': form})
+        form = UserCreationForm()
+    return render(request, 'quoteapp/registration/register.html', {'form': form})
 
-@login_required
-def add_quote(request):
+def user_login(request):
     if request.method == 'POST':
-        form = QuoteForm(request.POST)
+        form = AuthenticationForm(request, request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('quote_list')
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
     else:
-        form = QuoteForm()
-    return render(request, 'quoteapp/add_quote.html', {'form': form})
+        form = AuthenticationForm()
+    return render(request, 'quoteapp/registration/login.html', {'form': form})
 
-def author_detail(request, author_id):
-    author = Author.objects.get(pk=author_id)
-    quotes = Quote.objects.filter(author=author)
-    return render(request, 'quoteapp/author_detail.html', {'author': author, 'quotes': quotes})
-
+def user_logout(request):
+    logout(request)
+    return redirect('home')
