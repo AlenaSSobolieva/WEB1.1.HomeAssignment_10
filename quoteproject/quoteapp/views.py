@@ -1,7 +1,11 @@
-# quoteapp/views.py
+import os
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
+from .models import Author, Quote
+from .forms import AuthorForm, QuoteForm
+from django.conf import settings
+
 
 def register(request):
     if request.method == 'POST':
@@ -9,10 +13,14 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            return redirect('home')  # Change 'home' to the appropriate URL name for your home page
     else:
         form = UserCreationForm()
-    return render(request, 'quoteapp/registration/register.html', {'form': form})
+
+    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'registration', 'register.html')
+
+    return render(request, template_path, {'form': form})
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -20,11 +28,59 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')
+            return redirect('home')  # Change 'home' to the appropriate URL name for your home page
     else:
         form = AuthenticationForm()
-    return render(request, 'quoteapp/registration/login.html', {'form': form})
+
+    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'registration', 'login.html')
+
+    return render(request, template_path, {'form': form})
+
 
 def user_logout(request):
     logout(request)
-    return redirect('home')
+    return redirect('home')  # Change 'home' to the appropriate URL name for your home page
+
+
+def author_list(request):
+    authors = Author.objects.all()
+
+    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'quoteapp', 'author_list.html')
+
+    return render(request, template_path, {'authors': authors})
+
+
+def quote_list(request):
+    quotes = Quote.objects.all()
+
+    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'quoteapp', 'quote_list.html')
+
+    return render(request, template_path, {'quotes': quotes})
+
+
+def add_author(request):
+    if request.method == 'POST':
+        form = AuthorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('author_list')
+    else:
+        form = AuthorForm()
+
+    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'quoteapp', 'add_author.html')
+
+    return render(request, template_path, {'form': form})
+
+
+def add_quote(request):
+    if request.method == 'POST':
+        form = QuoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('quote_list')
+    else:
+        form = QuoteForm()
+
+    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'quoteapp', 'add_quote.html')
+
+    return render(request, template_path, {'form': form})
