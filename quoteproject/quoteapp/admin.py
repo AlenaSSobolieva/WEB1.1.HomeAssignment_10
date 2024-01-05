@@ -1,3 +1,10 @@
+# quoteapp/admin.py
+
 from django.contrib import admin
 
-# Register your models here.
+from django.contrib import admin
+from quoteproject.quoteapp.models import Author, Quote
+
+admin.site.register(Author)
+admin.site.register(Quote)
+

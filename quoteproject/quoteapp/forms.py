@@ -1,6 +1,8 @@
 # quoteapp/forms.py
+
+
 from django import forms
-from .models import Author, Quote
+from quoteproject.quoteapp.models import Author, Quote
 
 class AuthorForm(forms.ModelForm):
     class Meta:

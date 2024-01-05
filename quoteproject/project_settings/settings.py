@@ -1,4 +1,4 @@
-# quoteproject/settings.py
+# project_settings/settings.py
 
 from pathlib import Path
 
@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'quoteapp',
+    'quoteproject.quoteapp',
+    'quoteproject.project_settings',
 ]
 
 MIDDLEWARE = [
@@ -30,7 +31,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'quoteproject.urls'
+ROOT_URLCONF = 'quoteproject.project_settings.urls'
 
 TEMPLATES = [
     {
@@ -48,12 +49,12 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'quoteproject.wsgi.application'
+WSGI_APPLICATION = 'quoteproject.project_settings.wsgi.application'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / '/quoteproject/db.sqlite3',
     }
 }
 

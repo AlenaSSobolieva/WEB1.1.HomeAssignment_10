@@ -1,9 +1,11 @@
+# quoteapp/views.py
+
 import os
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-from .models import Author, Quote
-from .forms import AuthorForm, QuoteForm
+from quoteproject.quoteapp.models import Author, Quote
+from quoteproject.quoteapp.forms import AuthorForm, QuoteForm
 from django.conf import settings
 
 
@@ -17,7 +19,7 @@ def register(request):
     else:
         form = UserCreationForm()
 
-    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'registration', 'register.html')
+    template_path = os.path.join(settings.BASE_DIR, 'author_quote', 'templates', 'registration', 'register.html')
 
     return render(request, template_path, {'form': form})
 
@@ -32,7 +34,7 @@ def user_login(request):
     else:
         form = AuthenticationForm()
 
-    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'registration', 'login.html')
+    template_path = os.path.join(settings.BASE_DIR, 'author_quote', 'templates', 'registration', 'login.html')
 
     return render(request, template_path, {'form': form})
 
@@ -45,7 +47,7 @@ def user_logout(request):
 def author_list(request):
     authors = Author.objects.all()
 
-    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'quoteapp', 'author_list.html')
+    template_path = os.path.join(settings.BASE_DIR, 'author_quote', 'templates', 'author_quote', 'author_list.html')
 
     return render(request, template_path, {'authors': authors})
 
@@ -53,7 +55,7 @@ def author_list(request):
 def quote_list(request):
     quotes = Quote.objects.all()
 
-    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'quoteapp', 'quote_list.html')
+    template_path = os.path.join(settings.BASE_DIR, 'author_quote', 'templates', 'author_quote', 'quote_list.html')
 
     return render(request, template_path, {'quotes': quotes})
 
@@ -67,7 +69,7 @@ def add_author(request):
     else:
         form = AuthorForm()
 
-    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'quoteapp', 'add_author.html')
+    template_path = os.path.join(settings.BASE_DIR, 'author_quote', 'templates', 'author_quote', 'add_author.html')
 
     return render(request, template_path, {'form': form})
 
@@ -81,6 +83,6 @@ def add_quote(request):
     else:
         form = QuoteForm()
 
-    template_path = os.path.join(settings.BASE_DIR, 'quoteapp', 'templates', 'quoteapp', 'add_quote.html')
+    template_path = os.path.join(settings.BASE_DIR, 'author_quote', 'templates', 'author_quote', 'add_quote.html')
 
     return render(request, template_path, {'form': form})
