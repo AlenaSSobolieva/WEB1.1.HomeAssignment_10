@@ -4,8 +4,8 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from quoteproject.quoteapp.models import Author, Quote
 
-# os.environ['DJANGO_SETTINGS_MODULE'] = 'quoteproject.project_settings.settings'
-# settings.configure()
+os.environ['DJANGO_SETTINGS_MODULE'] = 'quoteproject.project_settings.settings'
+settings.configure()
 
 class QuoteAppTests(TestCase):
     def setUp(self):

@@ -35,3 +35,8 @@ python manage.py runserver
 cd C:\GIT_HUB\WEB1.1.HomeAssignment_10\quoteproject
 
 cd C:\GIT_HUB\WEB1.1.HomeAssignment_10\quoteproject\manage.py
+
+$env:DJANGO_SETTINGS_MODULE = "quoteproject.quoteapp.settings"
+
+python manage.py runserver
+

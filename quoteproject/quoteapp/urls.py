@@ -4,6 +4,8 @@
 from django.urls import path
 from quoteproject.quoteapp import views
 
+app_name = 'quoteapp'
+
 urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
@@ -13,3 +15,4 @@ urlpatterns = [
     path('add-author/', views.add_author, name='add_author'),
     path('add-quote/', views.add_quote, name='add_quote'),
 ]
+
